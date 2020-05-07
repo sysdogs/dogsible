@@ -1,0 +1,9 @@
+[general]
+ignore=body-is-missing,T3
+ignore-stdin=true
+
+[title-max-length]
+line-length=80
+
+[B1]
+line-length=123

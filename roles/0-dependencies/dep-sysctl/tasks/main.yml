@@ -1,0 +1,8 @@
+---
+
+- name: 'set {{ sysctl__name }} kernel parameter to {{ sysctl__value }}'
+  sysctl:
+    name: '{{ sysctl__name }}'
+    value: '{{ sysctl__value }}'
+    state: '{{ sysctl__state }}'
+    reload: '{{ sysctl__reload }}'

@@ -1,0 +1,13 @@
+---
+
+- name: 'put {{ apt__pkgs | mandatory | list | join(",") }} into {{ apt__state }}'
+  apt:
+    name: '{{ apt__pkgs }}'
+    state: '{{ apt__state }}'
+    autoclean: '{{ apt__autoclean }}'
+    autoremove: '{{ apt__autoremove }}'
+    install_recommends: '{{ apt__install_recommends }}'
+    only_upgrade: '{{ apt__only_upgrade }}'
+    update_cache: '{{ apt__update_cache }}'
+    cache_valid_time: '{{ apt__cache_valid_time }}'
+    force_apt_get: '{{ apt__force_apt_get }}'

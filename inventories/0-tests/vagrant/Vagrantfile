@@ -1,0 +1,80 @@
+## vim: ft=ruby
+
+ENV["LC_ALL"] = "en_US.UTF-8"
+
+
+require 'yaml'
+
+
+vagrantfileDirectory = File.dirname(File.expand_path(__FILE__))
+vagrantfileConfigurationYAML = "#{vagrantfileDirectory}/Vagrantfile.yml"
+serversConfigurationYAML = "#{vagrantfileDirectory}/Vagrantfile.servers.yml"
+vagrantConfig = YAML.load_file("#{vagrantfileConfigurationYAML}")
+serversConfig = YAML.load_file("#{serversConfigurationYAML}")
+
+
+Vagrant.require_version ">= 2.2.0"
+
+
+Vagrant.configure("2") do |config|
+
+  config.vagrant.plugins = vagrantConfig['global']['vagrant']['plugins']
+
+  config.hostmanager.enabled = vagrantConfig['global']['hostmanager']['enabled']
+  config.hostmanager.manage_host = vagrantConfig['global']['hostmanager']['manage_host']
+  config.hostmanager.manage_guest = vagrantConfig['global']['hostmanager']['manage_guest']
+  config.hostmanager.ignore_private_ip = vagrantConfig['global']['hostmanager']['ignore_private_ip']
+  config.hostmanager.include_offline = vagrantConfig['global']['hostmanager']['include_offline']
+
+  config.ssh.compression = vagrantConfig['global']['ssh']['compression']
+  config.ssh.keep_alive = vagrantConfig['global']['ssh']['keep_alive']
+  config.ssh.keys_only = vagrantConfig['global']['ssh']['keys_only']
+  config.ssh.extra_args = vagrantConfig['global']['ssh']['extra_args']
+  config.ssh.forward_x11 = vagrantConfig['global']['ssh']['forward_x11']
+  config.ssh.forward_agent = vagrantConfig['global']['ssh']['forward_agent']
+  config.ssh.private_key_path = vagrantConfig['global']['ssh']['private_key_path']
+  config.ssh.insert_key = vagrantConfig['global']['ssh']['insert_key']
+
+  serversConfig.each do |servers|
+    config.vm.box_download_insecure = true
+
+    config.vm.define servers["name"] do |srv|
+
+
+      srv.vm.hostname = servers["name"]
+      srv.vm.box = servers["box"]
+      srv.vm.box_check_update = servers["box_check_update"]
+      srv.vm.network "private_network", ip: servers["private_network_ip"]
+      srv.vm.synced_folder ".", "/vagrant", disabled: true
+
+      srv.vm.provision :hostmanager
+      srv.vm.provision :shell, inline: "sed -i'' '/^127.0.0.1.*/d' /etc/hosts"
+
+      srv.vm.provision "ansible" do |ansible|
+        ansible.verbose = "v"
+        ansible.compatibility_mode = vagrantConfig['global']['ansible']['compatibility_mode']
+        ansible.playbook = vagrantConfig['global']['ansible']['playbook']
+        ansible.groups = {
+            "k8s-masters" => ["k8s-master-0[1:3]"],
+            "k8s-nodes" => ["k8s-node-01"],
+            "es-masters" => ["es-master-0[1:3]"],
+            "es-kibanas" => ["es-kibana-0[1:1]"],
+            "centsible-test" => ["centos-0[1:1]"],
+            "debsible-test" => ["debian-0[1:1]"],
+            "proxmoxes"   => ["proxmox-0[1:2]"],
+            "graylogs" => ["graylog-0[1:1]"]
+        }
+        ansible.host_vars = { servers["name"] => {"ansible_host" => servers["private_network_ip"],
+                                                  "ansible_port" => "22"}}
+      end
+
+
+      srv.vm.provider "virtualbox" do |vb|
+        vb.customize [ "modifyvm", :id, "--audio", "none"]
+        vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+        vb.cpus = servers["vcpus"]
+        vb.memory = servers["memory"]
+      end
+    end
+  end
+end

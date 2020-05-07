@@ -1,0 +1,4 @@
+---
+
+yum__state: 'present'
+yum__update_cache: 'yes'

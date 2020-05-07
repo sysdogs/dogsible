@@ -1,0 +1,7 @@
+---
+
+- name: 'put {{ yum__pkgs | to_json }} into {{ yum__state }} state'
+  yum:
+    name: '{{ yum__pkgs }}'
+    state: '{{ yum__state }}'
+    update_cache: '{{ yum__update_cache }}'

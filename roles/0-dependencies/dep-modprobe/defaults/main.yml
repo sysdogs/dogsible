@@ -1,0 +1,4 @@
+---
+
+modprobe__state: 'present'
+modprobe__params: ''

@@ -1,0 +1,17 @@
+---
+
+- name: 'add {{ yum_repository__name }} gpg-key'
+  rpm_key:
+    key: '{{ item }}'
+    state: 'present'
+  with_list: '{{ yum_repository__gpgkey }}'
+  when: yum_repository__gpgkey is defined
+
+
+- name: 'add {{ yum_repository__name }} yum-repository'
+  yum_repository:
+    name: '{{ yum_repository__name }}'
+    description: '{{ yum_repository__description | default(yum_repository__name) }}'
+    baseurl: '{{ yum_repository__baseurl }}'
+    gpgkey: '{{ yum_repository__gpgkey | default(omit) }}'
+    gpgcheck: '{{ yum_repository__gpgcheck }}'

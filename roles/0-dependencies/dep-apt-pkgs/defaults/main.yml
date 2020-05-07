@@ -1,0 +1,6 @@
+---
+
+apt__cache_valid_time: 3600
+apt__only_upgrade: 'no'
+apt__force_apt_get: 'yes'
+apt__state: 'present'

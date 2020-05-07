@@ -1,0 +1,103 @@
+---
+
+- name: centos-01
+  box: centos/7
+  vcpus: 1
+  memory: 512
+  box_check_update: true
+  private_network_ip: 192.168.55.101
+
+
+- name: debian-01
+  box: debian/buster64
+  vcpus: 1
+  memory: 512
+  box_check_update: true
+  private_network_ip: 192.168.55.101
+
+
+- name: es-master-01
+  box: centos/7
+  vcpus: 1
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.101
+
+- name: es-master-02
+  box: centos/7
+  vcpus: 1
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.102
+
+
+- name: es-master-03
+  box: centos/7
+  vcpus: 1
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.103
+
+
+- name: es-kibana-01
+  box: centos/7
+  vcpus: 1
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.104
+
+
+- name: graylog-01
+  box: centos/7
+  vcpus: 1
+  memory: 4096
+  box_check_update: true
+  private_network_ip: 192.168.55.104
+
+
+- name: proxmox-01
+  box: debian/buster64
+  vcpus: 1
+  memory: 1024
+  box_check_update: true
+  private_network_ip: 192.168.55.111
+
+
+- name: proxmox-02
+  box: debian/buster64
+  vcpus: 1
+  memory: 1024
+  box_check_update: true
+  private_network_ip: 192.168.55.112
+
+
+- name: k8s-master-01
+  box: centos/7
+  vcpus: 2
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.101
+
+
+- name: k8s-master-02
+  box: centos/7
+  vcpus: 2
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.102
+
+
+- name: k8s-master-03
+  box: centos/7
+  vcpus: 2
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.103
+
+
+- name: k8s-node-01
+  box: centos/7
+  vcpus: 2
+  memory: 2048
+  box_check_update: true
+  private_network_ip: 192.168.55.104

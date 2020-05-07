@@ -1,0 +1,7 @@
+---
+
+- name: 'put {{ modprobe__name }} kernel-module into {{ modprobe__state }}'
+  modprobe:
+    name: '{{ modprobe__name }}'
+    state: '{{ modprobe__state }}'
+    params: '{{ modprobe__params }}'

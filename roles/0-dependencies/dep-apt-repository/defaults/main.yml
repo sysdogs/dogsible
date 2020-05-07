@@ -1,0 +1,7 @@
+---
+
+apt_key__directory: '/etc/apt/trusted.gpg.d/'
+
+apt_repository__validate_certs: 'yes'
+apt_repository__update_cache: 'yes'
+apt_repository__mode: '0400'

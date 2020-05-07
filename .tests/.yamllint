@@ -1,0 +1,20 @@
+---
+extends: default
+
+ignore: |
+  .venv/
+  inventories/0-test/.vagrant/
+
+rules:
+  document-start:
+    present: true
+    ignore: |
+     vault.yml
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  line-length: disable
+  truthy: {allowed-values: ['yes', 'no', 'true', 'false']}

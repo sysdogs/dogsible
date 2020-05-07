@@ -1,0 +1,26 @@
+---
+global:
+  vagrant:
+    plugins:
+      "vagrant-hostmanager"
+
+  ansible:
+    playbook: "../../../playbooks/0-vagrant/main.yml"
+    compatibility_mode: "2.0"
+
+  hostmanager:
+    enabled: true
+    manage_guest: true
+    manage_host: false
+    ignore_private_ip: false
+    include_offline: false
+
+  ssh:
+    compression: true
+    keep_alive: true
+    insert_key: false
+    extra_args: ["-4"]
+    keys_only: true
+    forward_x11: false
+    forward_agent: true
+    private_key_path: "~/.vagrant.d/insecure_private_key"

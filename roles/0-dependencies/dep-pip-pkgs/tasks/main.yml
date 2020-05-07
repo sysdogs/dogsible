@@ -1,0 +1,6 @@
+---
+
+- name: 'put {{ pip__pkgs }} into {{ pip__state }}'
+  pip:
+    name: '{{ pip__pkgs }}'
+    state: '{{ pip__state }}'

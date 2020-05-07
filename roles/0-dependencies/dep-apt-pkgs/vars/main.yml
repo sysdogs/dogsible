@@ -1,0 +1,6 @@
+---
+
+apt__autoclean: 'yes'
+apt__autoremove: 'yes'
+apt__install_recommends: 'no'
+apt__update_cache: 'yes'

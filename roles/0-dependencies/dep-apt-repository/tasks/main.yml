@@ -1,0 +1,15 @@
+---
+
+- name: 'install key -- {{ apt_key__name }}'
+  apt_key:
+    url: '{{ apt_key__url }}'
+    keyring: '{{ apt_key__directory }}/{{ apt_key__name }}.gpg'
+
+
+- name: 'install repository -- {{ apt_repository__name }}'
+  apt_repository:
+    repo: '{{ apt_repository__url }}'
+    mode: '{{ apt_repository__mode }}'
+    filename: '{{ apt_repository__name }}'
+    update_cache: '{{ apt_repository__update_cache }}'
+    validate_certs: '{{ apt_repository__validate_certs }}'

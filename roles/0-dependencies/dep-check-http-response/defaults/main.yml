@@ -1,0 +1,4 @@
+---
+
+check_http_response__retries: 8
+check_http_response__delay: 5
