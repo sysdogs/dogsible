@@ -1,0 +1,30 @@
+---
+image: python:3.7.3
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Build the test environment
+          caches:
+            - pip
+            - precommit
+          script:
+            - pip install --upgrade pip
+            - pip install -r requirements.txt
+
+      - step:
+          name: Test the code
+          caches:
+            - pip
+            - precommit
+          script:
+            - pip install --upgrade pip
+            - pip install -r requirements.txt
+            - gitlint --config .tests/.gitlint
+            - pre-commit install -f
+            - pre-commit run --all-files
+
+definitions:
+  caches:
+    precommit: ~/.cache/pre-commit
