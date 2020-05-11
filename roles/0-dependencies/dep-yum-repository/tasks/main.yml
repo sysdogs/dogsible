@@ -5,7 +5,7 @@
     key: '{{ item }}'
     state: 'present'
   with_list: '{{ yum_repository__gpgkey }}'
-  when: yum_repository__gpgkey is defined
+  when: 'yum_repository__gpgkey is defined'
 
 
 - name: 'add {{ yum_repository__name }} yum-repository'

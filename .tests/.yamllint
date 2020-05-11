@@ -17,4 +17,23 @@ rules:
     max-spaces-inside: 1
     level: error
   line-length: disable
-  truthy: {allowed-values: ['yes', 'no', 'true', 'false']}
+  truthy:
+    allowed-values: ['yes', 'no']
+    ignore: |
+      bitbucket-pipelines.yml
+      .yamllint
+      Vagrantfile.servers.yml
+      Vagrantfile.yml
+      .pre-commit-config.yaml
+  quoted-strings:
+    quote-type: single
+    required: true
+    ignore: |
+      bitbucket-pipelines.yml
+      .yamllint
+      Vagrantfile.servers.yml
+      Vagrantfile.yml
+      .pre-commit-config.yaml
+  empty-lines:
+    max: 2
+    max-start: 1

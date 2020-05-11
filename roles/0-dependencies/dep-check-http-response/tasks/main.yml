@@ -5,7 +5,7 @@
     url: '{{ check_http_response__url }}'
     user: '{{ check_http_response__user }}'
     password: '{{ check_http_response__password }}'
-  register: result
-  until: result is success
+  register: 'result'
+  until: 'result is success'
   retries: '{{ check_http_response__retries }}'
   delay: '{{ check_http_response__delay }}'
