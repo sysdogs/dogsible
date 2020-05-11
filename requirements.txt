@@ -1,0 +1,14 @@
+ansible==2.9.4
+ansible-lint==4.2.0
+cffi==1.13.2
+cryptography==2.8
+gitlint==0.13.1
+Jinja2==2.11.1
+MarkupSafe==1.1.1
+pre-commit==2.3.0
+proxmoxer==1.0.4
+pycparser==2.19
+PyYAML==5.3
+requests==2.23.0
+six==1.14.0
+yamllint==1.23.0
