@@ -1,0 +1,8 @@
+---
+
+docker__daemon_config:
+  exec_opts: ['native.cgroupdriver=systemd']
+  log_driver: 'json-file'
+  log_opts_max_size: '100m'
+  storage_driver: 'overlay2'
+  selinux_enabled: 'yes'

@@ -1,0 +1,6 @@
+---
+
+- hosts: 'centos'
+  roles:
+    - role: 'centsible.docker/centsible.docker-repository'
+    - role: 'centsible.docker/centsible.docker-install'

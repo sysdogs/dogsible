@@ -1,0 +1,8 @@
+{
+  "exec-opts": {{ docker__daemon_config.exec_opts | to_json }},
+  "log-driver": "{{ docker__daemon_config.log_driver }}",
+  "log-opts": {
+    "max-size": "{{ docker__daemon_config.log_opts_max_size }}"
+  },
+  "storage-driver": "{{ docker__daemon_config.storage_driver }}"
+}

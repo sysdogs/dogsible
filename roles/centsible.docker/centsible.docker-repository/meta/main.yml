@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - role: 'dep-yum-repository'
+    yum_repository__name: '{{ docker__repository_name }}'
+    yum_repository__baseurl: '{{ docker__repository_baseurl }}'
+    yum_repository__gpgkey: '{{ docker__repository_gpgkey }}'

@@ -1,0 +1,6 @@
+---
+
+- name: 'restart service -- {{ docker__service }}'
+  systemd:
+    name: '{{ docker__service }}'
+    state: 'restarted'

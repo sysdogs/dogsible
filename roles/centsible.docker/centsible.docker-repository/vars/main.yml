@@ -1,0 +1,5 @@
+---
+
+docker__repository_name: 'docker'
+docker__repository_baseurl: 'https://download.docker.com/linux/centos/7/$basearch/stable'
+docker__repository_gpgkey: 'https://download.docker.com/linux/centos/gpg'
