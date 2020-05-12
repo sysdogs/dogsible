@@ -1,0 +1,6 @@
+---
+
+- name: 'reboot -- {{ inventory_hostname }}'
+  reboot:
+    reboot_timeout: '{{ selinux__reboot_timeout }}'
+  when: 'selinux.reboot_required'

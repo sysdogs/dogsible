@@ -1,0 +1,4 @@
+---
+
+selinux__state: 'permissive'
+selinux__policy: 'targeted'

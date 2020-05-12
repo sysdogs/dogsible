@@ -1,0 +1,6 @@
+---
+
+- hosts: 'centos'
+  roles:
+    - role: 'centsible.selinux/centsible.selinux-state'
+    - role: 'centsible.selinux/centsible.selinux-develop'

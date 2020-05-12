@@ -1,0 +1,9 @@
+---
+
+- name: 'configure selinux -- {{ selinux__state }} - {{ selinux__policy }}'
+  selinux:
+    state: '{{ selinux__state }}'
+    policy: '{{ selinux__policy }}'
+  register: 'selinux'
+  notify:
+    - 'reboot -- {{ inventory_hostname }}'
