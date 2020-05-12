@@ -1,0 +1,7 @@
+---
+
+- name: 'remove all files associated with service -- {{ tcp_wrappers_remove__service }}'
+  file:
+    path: '{{ item }}'
+    state: 'absent'
+  with_items: '{{ tcp_wrappers_remove__files }}'

@@ -1,0 +1,6 @@
+---
+
+dependencies:
+  - role: 'dep-yum-pkgs'
+    yum__pkgs: '{{ tcp_wrappers_remove__pkgs }}'
+    yum__state: 'absent'

@@ -59,8 +59,8 @@ Vagrant.configure("2") do |config|
             "k8s-nodes" => ["k8s-node-01"],
             "es-masters" => ["es-master-0[1:3]"],
             "es-kibanas" => ["es-kibana-0[1:1]"],
-            "centsible-test" => ["centos-0[1:1]"],
-            "debsible-test" => ["debian-0[1:1]"],
+            "centos" => ["centos-0[1:1]"],
+            "debian" => ["debian-0[1:1]"],
             "proxmoxes"   => ["proxmox-0[1:2]"],
             "graylogs" => ["graylog-0[1:1]"]
         }

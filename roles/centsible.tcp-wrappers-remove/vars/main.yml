@@ -1,0 +1,13 @@
+---
+
+tcp_wrappers_remove__pkgs:
+  - 'tcp_wrappers-*'
+  - 'tcp_wrappers-devel-*'
+  - 'tcp_wrappers-libs-*'
+  - 'libwrap-*'
+
+tcp_wrappers_remove__files:
+  - '/etc/hosts.allow'
+  - '/etc/hosts.deny'
+
+tcp_wrappers_remove__service: 'tcp-wrappers'
