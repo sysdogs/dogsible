@@ -6,18 +6,30 @@ ignore: |
   inventories/0-test/.vagrant/
 
 rules:
+  braces:
+    level: error
+    max-spaces-inside: 1
+  brackets:
+    level: error
+    max-spaces-inside: 1
+  colons:
+    level: error
+  commas:
+    level: error
+  comments:
+    level: error
+  comments-indentation:
+    level: error
   document-start:
+    level: error
     present: true
     ignore: |
-     vault.yml
-  braces:
-    max-spaces-inside: 1
-    level: error
-  brackets:
-    max-spaces-inside: 1
-    level: error
+      vault.yml
   line-length: disable
+  trailing-spaces:
+    level: error
   truthy:
+    level: error
     allowed-values: ['yes', 'no']
     ignore: |
       bitbucket-pipelines.yml
@@ -26,6 +38,7 @@ rules:
       Vagrantfile.yml
       .pre-commit-config.yaml
   quoted-strings:
+    level: error
     quote-type: single
     required: true
     ignore: |
@@ -34,6 +47,13 @@ rules:
       Vagrantfile.servers.yml
       Vagrantfile.yml
       .pre-commit-config.yaml
+  key-duplicates:
+    level: error
+  new-line-at-end-of-file:
+    level: error
+  new-lines:
+    level: error
   empty-lines:
     max: 2
     max-start: 1
+    level: error
