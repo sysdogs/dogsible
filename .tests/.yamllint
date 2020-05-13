@@ -18,6 +18,11 @@ rules:
     level: error
   comments:
     level: error
+  indentation:
+    level: error
+    spaces: 2
+    indent-sequences: consistent
+    check-multi-line-strings: false
   comments-indentation:
     level: error
   document-start:
