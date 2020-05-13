@@ -2,18 +2,18 @@
 
 image: python:3.7.3
 
-pipelines:
-  default:
-    - step:
-        name: Build the test environment
+
+definitions:
+  steps:
+    - step: &test-security
+        name: Test security
         caches:
           - pip
-          - precommit
         script:
-          - pip install --upgrade pip
-          - pip install -r requirements.txt
+          - pip install safety
+          - safety check
 
-    - step:
+    - step: &test-the-code
         name: Test the code
         caches:
           - pip
@@ -24,7 +24,12 @@ pipelines:
           - gitlint --config .tests/.gitlint
           - pre-commit install -f
           - pre-commit run --all-files
-
-definitions:
   caches:
     precommit: ~/.cache/pre-commit
+
+
+pipelines:
+  default:
+    - parallel:
+        - step: *test-security
+        - step: *test-the-code
