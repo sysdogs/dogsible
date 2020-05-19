@@ -1,0 +1,10 @@
+---
+
+disable_swap__fstab_items:
+  - 'swap'
+  - 'none'
+
+disable_swap__command: 'swapoff -a'
+
+disable_swap__sysctl_name: 'vm.swappiness'
+disable_swap__sysctl_value: 1

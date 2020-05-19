@@ -1,0 +1,13 @@
+---
+
+- name: 'umount and remove all swap endpoints'
+  mount:
+    name: '{{ item }}'
+    fstype: 'swap'
+    state: 'absent'
+  with_items: '{{ disable_swap__fstab_items }}'
+
+
+- name: 'disable swap explicitly'
+  command: '{{ disable_swap__command }}'
+  when: 'ansible_swaptotal_mb > 0'
