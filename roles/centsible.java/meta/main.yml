@@ -1,0 +1,5 @@
+---
+
+dependencies:
+  - role: 'dep-yum-pkgs'
+    yum__pkgs: '{{ java__pkgs }}'
