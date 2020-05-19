@@ -1,0 +1,12 @@
+---
+
+- name: 'check if Python is already installed'
+  raw: 'test -p {{ python__pkg }}'
+  changed_when: 'false'
+  failed_when: 'false'
+  register: 'check_python'
+
+
+- name: 'install {{ python__pkg }} if not present'
+  raw: 'yum -y install {{ python__pkg }}'
+  when: 'check_python.rc != 0'
