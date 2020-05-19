@@ -1,0 +1,5 @@
+---
+
+- hosts: 'centos'
+  roles:
+    - role: 'dogsible.motd'

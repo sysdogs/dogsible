@@ -1,0 +1,11 @@
+---
+
+- name: 'template -- {{ motd__dest }}'
+  template:
+    src: '{{ motd__src }}'
+    dest: '{{ motd__dest }}'
+    owner: '{{ motd__owner }}'
+    group: '{{ motd__group }}'
+    mode: '{{ motd__mode }}'
+    validate: '{{ motd__validate }}'
+    force: '{{ motd__force }}'

@@ -1,0 +1,9 @@
+---
+
+motd__src: 'motd.j2'
+motd__dest: '/etc/motd'
+motd__owner: 'root'
+motd__group: 'root'
+motd__mode: '0400'
+motd__force: 'yes'
+motd__validate: 'ls %s'
