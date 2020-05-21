@@ -1,0 +1,7 @@
+---
+
+docker_compose__path: '/usr/local/bin/docker-compose'
+docker_compose__version: '1.25.5'
+docker_compose__owner: 'root'
+docker_compose__group: 'root'
+docker_compose__mode: 0755
