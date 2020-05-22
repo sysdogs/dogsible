@@ -1,0 +1,26 @@
+---
+
+sshd__pkgs:
+  - 'openssh-server'
+  - 'openssh-clients'
+
+sshd__service: 'sshd'
+
+sshd__config_src: 'sshd_config.j2'
+sshd__config_dest: '/etc/ssh/sshd_config'
+sshd__config_owner: 'root'
+sshd__config_group: 'root'
+sshd__config_mode: '0600'
+sshd__config_validate: '/usr/sbin/sshd -T -f %s'
+sshd__config_force: 'yes'
+
+sshd__banner_dir_type: 'directory'
+sshd__banner_dir_mode: '0400'
+
+sshd__banner_src: 'banner'
+sshd__banner_dest: '/etc/ssh/banner'
+sshd__banner_owner: 'root'
+sshd__banner_group: 'root'
+sshd__banner_mode: '0400'
+sshd__banner_validate: 'ls %s'
+sshd__banner_force: 'yes'

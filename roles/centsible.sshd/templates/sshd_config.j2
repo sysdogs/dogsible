@@ -1,0 +1,10 @@
+{{ ansible_managed | comment }}
+{%- for key, value in sshd__conf.items() -%}
+{%- if value is iterable and value is not string -%}
+{%- for opt in value -%}
+{{ key }} {{ opt }}
+{% endfor %}
+{% else %}
+{{ key }} {{ value}}
+{% endif -%}
+{% endfor -%}

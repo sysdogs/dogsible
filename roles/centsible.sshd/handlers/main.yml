@@ -1,0 +1,6 @@
+---
+
+- name: 'restart service -- {{ sshd__service }}'
+  systemd:
+    state: 'restarted'
+    name: '{{ sshd__service }}'
