@@ -1,0 +1,56 @@
+# =========================== Kibana Config File ==============================
+{{ ansible_managed | comment }}
+# ----------------------------- Kibana-Server ---------------------------------
+
+{% for key, value in kibana__config.server.items() %}
+{% if value !='' %}
+server.{{ key }}: {{ value }}
+{% else %}
+#server.{{ key }}:
+{% endif %}
+{% endfor %}
+
+# ----------------------------- Elasticsearch ---------------------------------
+
+elasticsearch.hosts:
+{% for host in groups['es-masters'] %}
+  - {{ kibana__config.protocol }}://{{ hostvars[host]['inventory_hostname'] }}:9200
+{% endfor %}
+
+{% for key, value in kibana__config.elasticsearch.items() %}
+{% if value !='' %}
+elasticsearch.{{ key }}: {{ value }}
+{% else %}
+#elasticsearch.{{ key }}:
+{% endif %}
+{% endfor %}
+
+# ----------------------------- Kibana-System ---------------------------------
+
+{% for key, value in kibana__config.kibana.items() %}
+{% if value !='' %}
+{{ key }}: {{ value }}
+{% else %}
+#{{ key }}:
+{% endif %}
+{% endfor %}
+
+# ----------------------------- Kibana-logging --------------------------------
+
+{% for key, value in kibana__config.logging.items() %}
+{% if value !='' %}
+logging.{{ key }}: {{ value }}
+{% else %}
+#logging.{{ key }}:
+{% endif %}
+{% endfor %}
+
+# -------------------------------- X-pack ------------------------------------
+
+{% for key, value in kibana__config.xpack.items() %}
+{% if value !='' %}
+xpack.{{ key }}: {{ value }}
+{% else %}
+#xpack.{{ key }}:
+{% endif %}
+{% endfor %}

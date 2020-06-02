@@ -1,0 +1,17 @@
+---
+
+- name: 'restart -- {{ kibana__service }}'
+  systemd:
+    name: '{{ kibana__service }}'
+    state: 'restarted'
+
+
+- name: '(smoke-test) -- check if service is reachable'
+  uri:
+    url: '{{ inventory__elastic_use_ssl | ternary("https://", "http://", omit) }}{{ ansible_hostname }}:{{ inventory__kibana_endpoint_port }}'
+    user: '{{ vault__elastic_username }}'
+    password: '{{ vault__elastic_password }}'
+  register: 'result'
+  until: 'result is success'
+  retries: '10'
+  delay: '5'

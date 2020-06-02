@@ -1,0 +1,50 @@
+---
+
+## Leave value as '' to comment it out in the config, disable it.
+kibana__config:
+  server:
+    port: '{{ inventory__kibana_endpoint_port }}'
+    host: '{{ inventory_hostname }}'
+    basePath: ''
+    rewriteBasePath: 'false'
+    maxPayloadBytes: '1048576'
+    name: 'kibana'
+    'ssl.enabled': 'true'
+    'ssl.certificate': '/etc/kibana/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+    'ssl.key': '/etc/kibana/{{ inventory__environment_name }}.ca.key.pem'
+  elasticsearch:
+    preserveHost: 'false'
+    username: '{{ vault__elastic_username }}'
+    password: '{{ vault__elastic_password }}'
+    verificationMode: ''
+    pingTimeout: ''
+    requestTimeout: '30000'
+    requestHeadersWhitelist: ''
+    customHeaders: ''
+    shardTimeout: '30000'
+    startupTimeout: '5000'
+    logQueries: ''
+    'ssl.certificateAuthorities': '/etc/kibana/{{ inventory__environment_name }}.ca.crt.pem'
+  kibana:
+    'kibana.index': '.kibana'
+    'pid.file': ''
+    'ops.interval': '5000'
+    'i18n.locale': 'en'
+  logging:
+    dest: ''
+    silent: ''
+    quiet: ''
+    verbose: ''
+  xpack:
+    'monitoring.enabled': 'true'
+    'monitoring.kibana.collection.enabled': 'true'
+  protocol: 'https'
+
+kibana__get_ssl_from_guest: 'yes'
+kibana__ca_cert_source: '/etc/pki/ca-trust/source/anchors/{{ inventory__environment_name }}.ca.crt.pem'
+kibana__key_source: '/etc/pki/tls/private/{{ inventory__environment_name }}.ca.key.pem'
+kibana__cert_source: '/etc/pki/tls/certs/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+
+kibana__ca_cert_target: '/etc/kibana/{{ inventory__environment_name }}.ca.crt.pem'
+kibana__key_target: '/etc/kibana/{{ inventory__environment_name }}.ca.key.pem'
+kibana__cert_target: '/etc/kibana/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'

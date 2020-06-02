@@ -1,0 +1,11 @@
+---
+
+kibana__pkgs: ['kibana']
+kibana__service: 'kibana'
+
+kibana__config_file_path: 'etc/kibana/kibana.yml'
+kibana__config_file_mode: '0644'
+
+kibana__ssl_owner: 'root'
+kibana__ssl_group: 'root'
+kibana__ssl_mode: 'preserve'

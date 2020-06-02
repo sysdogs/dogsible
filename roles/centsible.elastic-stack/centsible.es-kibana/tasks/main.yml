@@ -1,0 +1,43 @@
+---
+
+- name: 'get ownca root CA certificate to provided target path'
+  copy:
+    src: '{{ kibana__ca_cert_source }}'
+    remote_src: '{{ kibana__get_ssl_from_guest }}'
+    dest: '{{ kibana__ca_cert_target }}'
+    owner: '{{ kibana__ssl_owner }}'
+    group: '{{ kibana__ssl_group }}'
+    mode: '{{ kibana__ssl_mode }}'
+  notify: 'restart -- {{ kibana__service }}'
+
+
+- name: 'get ownca private key to provided target path'
+  copy:
+    src: '{{ kibana__key_source }}'
+    remote_src: '{{ kibana__get_ssl_from_guest }}'
+    dest: '{{ kibana__key_target }}'
+    owner: '{{ kibana__ssl_owner }}'
+    group: '{{ kibana__ssl_group }}'
+    mode: '{{ kibana__ssl_mode }}'
+  notify: 'restart -- {{ kibana__service }}'
+
+
+- name: 'get ownca ssl certificate to provided target path'
+  copy:
+    src: '{{ kibana__cert_source }}'
+    remote_src: '{{ kibana__get_ssl_from_guest }}'
+    dest: '{{ kibana__cert_target }}'
+    owner: '{{ kibana__ssl_owner }}'
+    group: '{{ kibana__ssl_group }}'
+    mode: '{{ kibana__ssl_mode }}'
+  notify: 'restart -- {{ kibana__service }}'
+
+
+- name: 'deploy configuration file {{ kibana__config_file_path }}'
+  template:
+    src: 'kibana.yml.j2'
+    dest: '/{{ kibana__config_file_path }}'
+    mode: '{{ kibana__config_file_mode }}'
+  notify:
+    - 'restart -- {{ kibana__service }}'
+    - '(smoke-test) -- check if service is reachable'
