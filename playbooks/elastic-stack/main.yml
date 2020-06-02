@@ -1,0 +1,17 @@
+---
+
+- hosts: 'es-masters'
+  roles:
+    - role: 'centsible.generate-certificate-authority'
+  vars_files:
+    - '{{ inventory_dir }}/secrets.yml'
+
+
+- hosts: 'es-masters'
+  roles:
+    - role: 'centsible.elastic-stack/centsible.es-elastic-7-repository'
+    - role: 'centsible.elastic-stack/centsible.es-elastic-7'
+    - role: 'centsible.elastic-stack/centsible.es-elastic-password-setup'
+    - role: 'centsible.elastic-stack/centsible.es-keystore-add-ca'
+  vars_files:
+    - '{{ inventory_dir }}/secrets.yml'

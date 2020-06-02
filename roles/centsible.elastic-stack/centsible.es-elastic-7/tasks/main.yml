@@ -1,0 +1,49 @@
+---
+
+- name: 'get ownca root CA certificate to provided target path'
+  copy:
+    src: '{{ elastic_7__ca_cert_source }}'
+    remote_src: '{{ elastic_7__get_ssl_from_guest }}'
+    dest: '{{ elastic_7__ca_cert_target }}'
+    owner: '{{ elastic_7__owner }}'
+    group: '{{ elastic_7__group }}'
+    mode: '{{ elastic_7__mode }}'
+  notify: 'restart -- {{ elastic_7__service }}'
+
+
+- name: 'get ownca private key to provided target path'
+  copy:
+    src: '{{ elastic_7__key_source }}'
+    remote_src: '{{ elastic_7__get_ssl_from_guest }}'
+    dest: '{{ elastic_7__key_target }}'
+    owner: '{{ elastic_7__owner }}'
+    group: '{{ elastic_7__group }}'
+    mode: '{{ elastic_7__mode }}'
+  notify: 'restart -- {{ elastic_7__service }}'
+
+
+- name: 'get ownca ssl certificate to provided target path'
+  copy:
+    src: '{{ elastic_7__cert_source }}'
+    remote_src: '{{ elastic_7__get_ssl_from_guest }}'
+    dest: '{{ elastic_7__cert_target }}'
+    owner: '{{ elastic_7__owner }}'
+    group: '{{ elastic_7__group }}'
+    mode: '{{ elastic_7__mode }}'
+  notify: 'restart -- {{ elastic_7__service }}'
+
+
+- name: 'deploy configuration file -- {{ elastic_7__config_file }}'
+  template:
+    src: '{{ elastic_7__config_file }}.j2'
+    dest: '/etc/elasticsearch/{{ elastic_7__config_file }}'
+    mode: '{{ elastic_7__config_file_mode }}'
+  notify: 'restart -- {{ elastic_7__service }}'
+
+
+- name: 'start -- {{ elastic_7__service }}'
+  systemd:
+    name: '{{ elastic_7__service }}'
+    state: 'started'
+    enabled: 'yes'
+  notify: '(smoke-test) -- check master-master communication'

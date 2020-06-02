@@ -1,0 +1,63 @@
+# ======================== Elasticsearch Configuration =========================
+{{ ansible_managed | comment }}
+# --------------------------------- Generic ------------------------------------
+#
+{% for key, value in elastic_7__config.generic.items() %}
+{% if value !='' %}
+{{ key }}: {{ value }}
+{% else %}
+#{{ key }}:
+{% endif %}
+{% endfor %}
+#
+# ----------------------------------- Paths ------------------------------------
+#
+{% for key, value in elastic_7__config.paths.items() %}
+{% if value !='' %}
+{{ key }}: {{ value }}
+{% else %}
+#{{ key }}:
+{% endif %}
+{% endfor %}
+#
+# ---------------------------------- Network ------------------------------------
+#
+{% for key, value in elastic_7__config.network.items() %}
+{% if value !='' %}
+{{ key }}: {{ value }}
+{% else %}
+#{{ key }}:
+{% endif %}
+{% endfor %}
+#
+# --------------------------------- Discovery ------------------------------------
+#
+discovery.seed_hosts: [
+{%- for host in groups['es-masters'] -%}
+'{{ host }}',
+{%- endfor -%}]
+cluster.initial_master_nodes: [
+{%- for host in groups['es-masters'] -%}
+'{{ host }}',
+{%- endfor -%}]
+#
+# ----------------------------------- X-pack ------------------------------------
+#
+{% for key, value in elastic_7__config.xpack.items() %}
+{% if value !='' %}
+{{ key }}: {{ value }}
+{% else %}
+#{{ key }}:
+{% endif %}
+{% endfor %}
+#
+# -------------------------------- X-pack - ssl ----------------------------------
+#
+{% for key, value in elastic_7__config.xpack_security.items() %}
+{% if value !='' %}
+{{ key }}: {{ value }}
+{% else %}
+#{{ key }}:
+{% endif %}
+{% endfor %}
+#

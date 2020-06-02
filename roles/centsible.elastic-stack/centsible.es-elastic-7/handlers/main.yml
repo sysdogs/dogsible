@@ -1,0 +1,16 @@
+---
+
+- name: 'restart -- {{ elastic_7__service }}'
+  systemd:
+    name: '{{ elastic_7__service }}'
+    state: 'restarted'
+
+
+- name: '(smoke-test) -- check master-master communication'
+  wait_for:
+    host: '{{ item }}'
+    port: '9300'
+    state: 'started'
+  retries: '10'
+  delay: '5'
+  with_items: '{{ groups["es-masters"] }}'

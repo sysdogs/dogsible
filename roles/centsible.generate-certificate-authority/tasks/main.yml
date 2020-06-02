@@ -1,0 +1,99 @@
+---
+
+- name: 'generate certificate-authority private key -- {{ inventory__environment_name }}'
+  delegate_to: 'localhost'
+  become: 'no'
+  openssl_privatekey:
+    path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_private_key_name }}'
+    size: '{{ generate_certificate_autority__authority_private_key_size }}'
+    select_crypto_backend: 'cryptography'
+
+
+- name: 'generate certificate-authority certificate-sign-request -- {{ inventory__environment_name }}'
+  delegate_to: 'localhost'
+  become: 'no'
+  openssl_csr:
+    path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__csr_name }}'
+    privatekey_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_private_key_name }}'
+    common_name: '{{ inventory__environment_name }}'
+    basic_constraints: 'CA:TRUE'
+    country_name: '{{ generate_certificate_authority__country_name }}'
+    organization_name: '{{ generate_certificate_authority__organization_name }}'
+    email_address: '{{ generate_certificate_authority__email_address }}'
+
+
+- name: 'generate certificate-authority certificate -- {{ inventory__environment_name }}'
+  delegate_to: 'localhost'
+  become: 'no'
+  openssl_certificate:
+    path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_certificate_name }}'
+    privatekey_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_private_key_name }}'
+    csr_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__csr_name }}'
+    provider: 'selfsigned'
+
+
+- name: 'generate private keys for hosts -- {{ inventory__environment_name }}'
+  delegate_to: 'localhost'
+  become: 'no'
+  openssl_privatekey:
+    path: '{{ generate_certificate_autority__directory }}/{{ item }}-{{ generate_certificate_autority__authority_private_key_name }}'
+    size: '{{ generate_certificate_autority__authority_private_key_size }}'
+    select_crypto_backend: 'cryptography'
+  with_items: '{{ groups["all"] }}'
+
+
+- name: 'generate certificate-sign-request -- {{ inventory__environment_name }}'
+  delegate_to: 'localhost'
+  become: 'no'
+  openssl_csr:
+    path: '{{ generate_certificate_autority__directory }}/{{ item }}-{{ generate_certificate_autority__csr_name }}'
+    privatekey_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_private_key_name }}'
+    common_name: '{{ item }}'
+    country_name: '{{ generate_certificate_authority__country_name }}'
+    organization_name: '{{ generate_certificate_authority__organization_name }}'
+    email_address: '{{ generate_certificate_authority__email_address }}'
+  with_items: '{{ groups["all"] }}'
+
+
+- name: 'generate certificate -- {{ inventory__environment_name }}'
+  delegate_to: 'localhost'
+  become: 'no'
+  openssl_certificate:
+    path: '{{ generate_certificate_autority__directory }}/{{ item }}-{{ generate_certificate_autority__authority_certificate_name }}'
+    privatekey_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_private_key_name }}'
+    csr_path: '{{ generate_certificate_autority__directory }}/{{ item }}-{{ generate_certificate_autority__csr_name }}'
+    ownca_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_certificate_name }}'
+    ownca_privatekey_path: '{{ generate_certificate_autority__directory }}/{{ generate_certificate_autority__authority_private_key_name }}'
+    provider: 'ownca'
+  with_items: '{{ groups["all"] }}'
+
+
+- name: 'deliver certificate authority certificate to default system location'
+  copy:
+    src: '{{ inventory_dir }}/files/certificates/{{ inventory__environment_name }}.ca.crt.pem'
+    dest: '/etc/pki/ca-trust/source/anchors/{{ inventory__environment_name }}.ca.crt.pem'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+
+- name: 'deliver private key to default system location'
+  copy:
+    src: '{{ inventory_dir }}/files/certificates/{{ inventory__environment_name }}.ca.key.pem'
+    dest: '/etc/pki/tls/private/{{ inventory__environment_name }}.ca.key.pem'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+
+- name: 'deliver ssl certificate to default system location'
+  copy:
+    src: '{{ inventory_dir }}/files/certificates/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+    dest: '/etc/pki/tls/certs/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+
+- name: 'reload acknowledged certificates on inventory hosts'
+  shell: 'update-ca-trust'

@@ -1,0 +1,12 @@
+---
+
+elastic_7__pkgs: ['elasticsearch']
+elastic_7__service: 'elasticsearch'
+
+elastic_7__config_file: 'elasticsearch.yml'
+elastic_7__config_file_mode: '0440'
+elastic_7__config_node_name: '{{ ansible_nodename }}'
+
+elastic_7__owner: 'root'
+elastic_7__group: 'root'
+elastic_7__mode: 'preserve'

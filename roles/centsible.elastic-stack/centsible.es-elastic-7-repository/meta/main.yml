@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - role: 'dep-yum-repository'
+    yum_repository__name: '{{ elastic_7_repository__name }}'
+    yum_repository__baseurl: '{{ elastic_7_repository__baseurl }}'
+    yum_repository__gpgkey: '{{ elastic_7_repository__gpgkey }}'

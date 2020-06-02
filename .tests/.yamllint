@@ -4,6 +4,7 @@ extends: default
 ignore: |
   .venv/
   inventories/0-test/.vagrant/
+  secrets.yml
 
 rules:
   braces:

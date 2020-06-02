@@ -1,0 +1,5 @@
+---
+
+elastic_7_repository__name: 'elastic'
+elastic_7_repository__baseurl: 'https://artifacts.elastic.co/packages/7.x/yum'
+elastic_7_repository__gpgkey: 'https://artifacts.elastic.co/GPG-KEY-elasticsearch'

@@ -1,0 +1,12 @@
+---
+
+generate_certificate_autority__directory: '{{ inventory_dir }}/files/certificates'
+generate_certificate_autority__csr_name: '{{ inventory__environment_name }}.ca.csr.pem'
+generate_certificate_autority__authority_certificate_name: '{{ inventory__environment_name }}.ca.crt.pem'
+generate_certificate_autority__authority_private_key_name: '{{ inventory__environment_name }}.ca.key.pem'
+generate_certificate_autority__authority_private_key_size: 2048
+generate_certificate_autority__authority_private_key_cipher: 'auto'
+generate_certificate_autority__authority_private_key_select_crypto_backend: 'auto'
+
+generate_certificate_autority__certificate_name: '{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+generate_certificate_autority__private_key_name: '{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.key.pem'

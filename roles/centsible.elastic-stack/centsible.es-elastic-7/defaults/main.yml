@@ -1,0 +1,38 @@
+---
+
+elastic_7__config:
+  generic:
+    'cluster.name': 'elasticsearch'
+    'node.name': '{{ ansible_hostname }}'
+    'bootstrap.memory_lock': 'false'
+    'gateway.recover_after_nodes': '3'
+    'action.destructive_requires_name': 'true'
+  paths:
+    'path.data': '/var/lib/elasticsearch'
+    'path.logs': '/var/log/elasticsearch'
+  network:
+    'network.host': '{{ ansible_hostname }}'
+    'http.port': '{{ inventory__elasticsearch_endpoint_port }}'
+  xpack:
+    'xpack.license.self_generated.type': 'basic'
+    'xpack.monitoring.enabled': 'true'
+    'xpack.monitoring.collection.enabled': 'true'
+  xpack_security:
+    'xpack.security.enabled': 'true'
+    'xpack.security.http.ssl.enabled': 'true'
+    'xpack.security.transport.ssl.enabled': 'true'
+    'xpack.security.transport.ssl.verification_mode': 'certificate'
+    'xpack.security.transport.ssl.key': '/etc/elasticsearch/{{ inventory__environment_name }}.ca.key.pem'
+    'xpack.security.transport.ssl.certificate': '/etc/elasticsearch/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+    'xpack.security.http.ssl.key': '/etc/elasticsearch/{{ inventory__environment_name }}.ca.key.pem'
+    'xpack.security.http.ssl.certificate': '/etc/elasticsearch/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+    'xpack.security.http.ssl.certificate_authorities': '/etc/elasticsearch/{{ inventory__environment_name }}.ca.crt.pem'
+
+elastic_7__ca_cert_source: '/etc/pki/ca-trust/source/anchors/{{ inventory__environment_name }}.ca.crt.pem'
+elastic_7__key_source: '/etc/pki/tls/private/{{ inventory__environment_name }}.ca.key.pem'
+elastic_7__cert_source: '/etc/pki/tls/certs/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+
+elastic_7__ca_cert_target: '/etc/elasticsearch/{{ inventory__environment_name }}.ca.crt.pem'
+elastic_7__key_target: '/etc/elasticsearch/{{ inventory__environment_name }}.ca.key.pem'
+elastic_7__cert_target: '/etc/elasticsearch/{{ inventory_hostname }}-{{ inventory__environment_name }}.ca.crt.pem'
+elastic_7__get_ssl_from_guest: 'yes'

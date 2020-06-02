@@ -1,0 +1,5 @@
+---
+
+dependencies:
+  - role: 'dep-yum-pkgs'
+    yum__pkgs: '{{ elastic_7__pkgs }}'

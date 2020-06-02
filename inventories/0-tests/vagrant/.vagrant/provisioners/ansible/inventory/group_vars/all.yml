@@ -1,0 +1,7 @@
+---
+
+inventory__environment_name: 'prod'
+inventory__elastic_use_ssl: 'yes'
+inventory__elasticsearch_endpoint_port: '9200'
+inventory__elastic_adjust_user: 'yes'
+inventory__kibana_endpoint_port: '5601'

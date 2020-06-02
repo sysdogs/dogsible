@@ -1,0 +1,7 @@
+---
+
+- name: 'change elasticsearch bootstrap password'
+  shell: 'echo {{ vault__elastic_password }} | /usr/share/elasticsearch/bin/elasticsearch-keystore add --stdin bootstrap.password'
+  when: 'es_password_setup__elastic_adjust_user|bool'
+  notify:
+    - '(smoke-test) -- check if credentials are valid'

@@ -1,3 +1,8 @@
 ## vagrant {{{1
-.vagrant/*
+.vagrant/machines/*
+.vagrant/plugins/*
+.vagrant/rgloader/*
+.vagrant/provisioners/ansible/inventory/files/*
+.vagrant/plugins.json
+.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
 ## }}}1

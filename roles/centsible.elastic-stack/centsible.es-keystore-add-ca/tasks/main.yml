@@ -1,0 +1,10 @@
+---
+
+- name: 'add ca certificate to the elasticsearch jdk keystore'
+  java_cert:
+    executable: '{{ keystore_add_certificate_authority__executable }}'
+    keystore_path: '{{ keystore_add_certificate_authority__keystore_path }}'
+    keystore_pass: 'changeit'
+    cert_alias: '{{ keystore_add_certificate_authority__cert_alias }}'
+    cert_path: '{{ keystore_add_certificate_authority__cert_path }}'
+    state: 'present'

@@ -1,0 +1,7 @@
+---
+
+# These variables must be set before the role can be used.
+
+# generate_certificate_authority__country_name: ''
+# generate_certificate_authority__organization_name: ''
+# generate_certificate_authority__email_address: ''
