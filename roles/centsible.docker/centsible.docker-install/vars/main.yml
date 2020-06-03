@@ -4,10 +4,5 @@ docker__pkgs: ['docker-ce', 'docker-ce-cli', 'containerd.io']
 
 docker__config_src: 'daemon.json.j2'
 docker__config_dest: '/etc/docker/daemon.json'
-docker__config_owner: 'root'
-docker__config_group: 'root'
-docker__config_mode: '0400'
-docker__config_validate: 'ls %s'
-docker__config_force: 'yes'
 
 docker__service: 'docker'

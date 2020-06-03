@@ -2,4 +2,3 @@
 
 firewalld__pkgs: ['firewalld']
 firewalld__service: 'firewalld'
-firewalld__enabled: 'yes'

@@ -5,9 +5,9 @@
     src: '{{ kibana__ca_cert_source }}'
     remote_src: '{{ kibana__get_ssl_from_guest }}'
     dest: '{{ kibana__ca_cert_target }}'
-    owner: '{{ kibana__ssl_owner }}'
-    group: '{{ kibana__ssl_group }}'
-    mode: '{{ kibana__ssl_mode }}'
+    owner: 'root'
+    group: 'root'
+    mode: 'preserve'
   notify: 'restart -- {{ kibana__service }}'
 
 
@@ -16,9 +16,9 @@
     src: '{{ kibana__key_source }}'
     remote_src: '{{ kibana__get_ssl_from_guest }}'
     dest: '{{ kibana__key_target }}'
-    owner: '{{ kibana__ssl_owner }}'
-    group: '{{ kibana__ssl_group }}'
-    mode: '{{ kibana__ssl_mode }}'
+    owner: 'root'
+    group: 'root'
+    mode: 'preserve'
   notify: 'restart -- {{ kibana__service }}'
 
 
@@ -27,17 +27,17 @@
     src: '{{ kibana__cert_source }}'
     remote_src: '{{ kibana__get_ssl_from_guest }}'
     dest: '{{ kibana__cert_target }}'
-    owner: '{{ kibana__ssl_owner }}'
-    group: '{{ kibana__ssl_group }}'
-    mode: '{{ kibana__ssl_mode }}'
+    owner: 'root'
+    group: 'root'
+    mode: 'preserve'
   notify: 'restart -- {{ kibana__service }}'
 
 
-- name: 'deploy configuration file {{ kibana__config_file_path }}'
+- name: 'deploy configuration file -- /etc/kibana/kibana.yml'
   template:
     src: 'kibana.yml.j2'
-    dest: '/{{ kibana__config_file_path }}'
-    mode: '{{ kibana__config_file_mode }}'
+    dest: '/etc/kibana/kibana.yml'
+    mode: '0644'
   notify:
     - 'restart -- {{ kibana__service }}'
     - '(smoke-test) -- check if service is reachable'

@@ -4,3 +4,5 @@ keystore_add_certificate_authority__executable: '/usr/share/elasticsearch/jdk/bi
 keystore_add_certificate_authority__keystore_path: '/usr/share/elasticsearch/jdk/lib/security/cacerts'
 keystore_add_certificate_authority__cert_alias: 'elastic-ca'
 keystore_add_certificate_authority__cert_path: '/etc/elasticsearch/{{ inventory__environment_name }}.ca.crt.pem'
+keystore_add_certificate_authority__keystore_pass: 'changeit'
+keystore_add_certificate_authority__state: 'present'

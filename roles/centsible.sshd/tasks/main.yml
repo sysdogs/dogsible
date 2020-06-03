@@ -2,28 +2,29 @@
 
 - name: 'start service -- {{ sshd__service }}'
   systemd:
-    state: 'started'
     name: '{{ sshd__service }}'
+    state: 'started'
 
 
 - name: 'template -- {{ sshd__config_dest }}'
   template:
     src: '{{ sshd__config_src }}'
-    dest: '{{ sshd__config_dest }}'
-    owner: '{{ sshd__config_owner }}'
-    group: '{{ sshd__config_group }}'
-    mode: '{{ sshd__config_mode }}'
-    validate: '{{ sshd__config_validate }}'
-    force: '{{ sshd__config_force }}'
+    dest: '/etc/ssh/sshd_config'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+    force: 'yes'
+    validate: '/usr/sbin/sshd -T -f %s'
+  notify: 'restart service -- {{ sshd__service }}'
 
 
 - name: 'copy banner -- {{ sshd__banner_dest }}'
   copy:
     src: '{{ sshd__banner_src }}'
-    dest: '{{ sshd__banner_dest }}'
-    owner: '{{ sshd__banner_owner }}'
-    group: '{{ sshd__banner_group }}'
-    mode: '{{ sshd__banner_mode }}'
-    validate: '{{ sshd__banner_validate }}'
-    force: '{{ sshd__banner_force }}'
+    dest: '/etc/ssh/banner'
+    owner: 'root'
+    group: 'root'
+    mode: '0400'
+    force: 'yes'
+    validate: 'ls %s'
   notify: 'restart service -- {{ sshd__service }}'

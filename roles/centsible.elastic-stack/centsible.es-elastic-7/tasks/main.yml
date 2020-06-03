@@ -5,9 +5,9 @@
     src: '{{ elastic_7__ca_cert_source }}'
     remote_src: '{{ elastic_7__get_ssl_from_guest }}'
     dest: '{{ elastic_7__ca_cert_target }}'
-    owner: '{{ elastic_7__owner }}'
-    group: '{{ elastic_7__group }}'
-    mode: '{{ elastic_7__mode }}'
+    owner: 'root'
+    group: 'root'
+    mode: 'preserve'
   notify: 'restart -- {{ elastic_7__service }}'
 
 
@@ -16,9 +16,9 @@
     src: '{{ elastic_7__key_source }}'
     remote_src: '{{ elastic_7__get_ssl_from_guest }}'
     dest: '{{ elastic_7__key_target }}'
-    owner: '{{ elastic_7__owner }}'
-    group: '{{ elastic_7__group }}'
-    mode: '{{ elastic_7__mode }}'
+    owner: 'root'
+    group: 'root'
+    mode: 'preserve'
   notify: 'restart -- {{ elastic_7__service }}'
 
 
@@ -27,17 +27,17 @@
     src: '{{ elastic_7__cert_source }}'
     remote_src: '{{ elastic_7__get_ssl_from_guest }}'
     dest: '{{ elastic_7__cert_target }}'
-    owner: '{{ elastic_7__owner }}'
-    group: '{{ elastic_7__group }}'
-    mode: '{{ elastic_7__mode }}'
+    owner: 'root'
+    group: 'root'
+    mode: 'preserve'
   notify: 'restart -- {{ elastic_7__service }}'
 
 
-- name: 'deploy configuration file -- {{ elastic_7__config_file }}'
+- name: 'deploy configuration file -- /etc/elasticsearch/elasticsearch.yml'
   template:
-    src: '{{ elastic_7__config_file }}.j2'
-    dest: '/etc/elasticsearch/{{ elastic_7__config_file }}'
-    mode: '{{ elastic_7__config_file_mode }}'
+    src: 'elasticsearch.yml.j2'
+    dest: '/etc/elasticsearch/elasticsearch.yml'
+    mode: '0440'
   notify: 'restart -- {{ elastic_7__service }}'
 
 

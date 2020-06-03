@@ -2,6 +2,6 @@
 
 - name: 'start -- {{ firewalld__service }}'
   systemd:
-    state: 'started'
-    enabled: '{{ firewalld__enabled }}'
     name: '{{ firewalld__service }}'
+    state: 'started'
+    enabled: 'yes'

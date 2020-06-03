@@ -6,13 +6,13 @@
   get_url:
     url: 'https://github.com/docker/compose/releases/download/{{ docker_compose__version }}/docker-compose-Linux-x86_64'
     dest: '{{ inventory_dir }}/files/docker-compose'
-    mode: 0755
+    mode: '0755'
 
 
-- name: 'send the binary to hosts -- {{ docker_compose__path }}'
+- name: 'send the binary to hosts -- /usr/local/bin/docker-compose'
   copy:
     src: '{{ inventory_dir }}/files/docker-compose'
-    dest: '{{ docker_compose__path }}'
-    owner: '{{ docker_compose__owner }}'
-    group: '{{ docker_compose__group }}'
-    mode: '{{ docker_compose__mode }}'
+    dest: '/usr/local/bin/docker-compose'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'

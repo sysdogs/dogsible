@@ -10,10 +10,10 @@
   template:
     src: '{{ docker__config_src }}'
     dest: '{{ docker__config_dest }}'
-    owner: '{{ docker__config_owner }}'
-    group: '{{ docker__config_group }}'
-    mode: '{{ docker__config_mode }}'
-    validate: '{{ docker__config_validate }}'
-    force: '{{ docker__config_force }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0400'
+    validate: 'ls %s'
+    force: 'yes'
   notify:
     - 'restart service -- {{ docker__service }}'
