@@ -22,7 +22,7 @@ pre-commit==2.4.0
 proxmoxer==1.0.4
 pycparser==2.19
 python-dateutil==2.8.1
-PyYAML==5.3
+PyYAML==5.4
 requests==2.23.0
 ruamel.yaml==0.16.10
 ruamel.yaml.clib==0.2.0
